@@ -6,7 +6,6 @@ const FanfaraADisposizione = () => {
           FANFARA A DISPOSIZIONE
         </h2>
         <p className="text-xl text-gray-200">REPERTORIO DELLA FANFARA</p>
-        {/* Qui potrebbe esserci un link o ulteriori informazioni sul repertorio */}
       </div>
     </section>
   );
