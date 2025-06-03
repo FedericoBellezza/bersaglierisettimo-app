@@ -1,0 +1,4 @@
+
+.icon-calendar:before { content: '\e800'; } /* '' */
+.icon-video:before { content: '\e801'; } /* '' */
+.icon-picture:before { content: '\e802'; } /* '' */
