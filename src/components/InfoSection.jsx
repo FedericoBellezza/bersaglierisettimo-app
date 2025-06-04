@@ -244,7 +244,7 @@ const EventsSection = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl font-bold text-gray-900 mb-4"
         >
-          I Nostri <span className="text-red-600">Eventi</span>
+          I Nostri <span className="text-red-600">Servizi</span>
         </motion.h2>
 
         <motion.div

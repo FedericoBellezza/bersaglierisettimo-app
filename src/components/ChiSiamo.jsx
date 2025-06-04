@@ -57,8 +57,16 @@ const ChiSiamo = () => {
                 <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-1">
                   Email
                 </h4>
-                <p className="text-lg font-medium">
-                  bersaglierisettimo@gmail.com
+                <p
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      "fanfarasettimotorinese@gmail.com"
+                    );
+                    alert("✅ Email copiata!");
+                  }}
+                  className="text-lg font-medium cursor-pointer"
+                >
+                  fanfarasettimotorinese@gmail.com
                 </p>
               </div>
 
@@ -66,8 +74,16 @@ const ChiSiamo = () => {
                 <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-1">
                   Sede
                 </h4>
-                <p className="text-lg font-medium">
-                  Via Esempio 123, Settimo Torinese
+                <p
+                  onClick={() => {
+                    window.open(
+                      "https://www.google.it/maps/place/Via+Buonarroti,+8,+10036+Settimo+Torinese+TO/@45.1395319,7.7704076,17z/data=!3m1!4b1!4m6!3m5!1s0x478871053582c461:0x10dd572d833ffa6d!8m2!3d45.1395319!4d7.7729879!16s%2Fg%2F11c0yj3n0_?hl=it&entry=ttu&g_ep=EgoyMDI1MDYwMS4wIKXMDSoASAFQAw%3D%3D",
+                      "_blank"
+                    );
+                  }}
+                  className="text-lg font-medium cursor-pointer"
+                >
+                  Via Buonarroti, 8 - Settimo Torinese
                 </p>
               </div>
 

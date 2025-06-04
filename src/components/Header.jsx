@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
 
   const menuItems = [
     { href: "#calendario", label: "Calendario" },
-    { href: "#video", label: "Video" },
+    { href: "/video", label: "Video" },
     { href: "#foto", label: "Foto" },
   ];
 
@@ -151,7 +152,7 @@ const Header = () => {
           <ul className="flex space-x-1 lg:space-x-6 items-center">
             {menuItems.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm lg:text-base uppercase font-medium transition-colors relative group ${
                     isAtTop ? "text-white drop-shadow-lg" : "text-white"
@@ -159,7 +160,7 @@ const Header = () => {
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-300 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
