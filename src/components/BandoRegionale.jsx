@@ -156,22 +156,6 @@ export default function BandoRegionale() {
                 <div className="w-16 h-1 bg-yellow-300 opacity-70 mx-auto"></div>
               </div>
             </motion.div>
-
-            {/* Call to action */}
-            <motion.div variants={itemVariants} className="mt-12 text-center">
-              <p className="text-gray-600 mb-6">
-                Scopri come il nostro progetto sta aiutando a mantenere attiva
-                la tradizione musicale
-              </p>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="#"
-                className="inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors shadow-md"
-              >
-                Partecipa al progetto
-              </motion.a>
-            </motion.div>
           </motion.div>
         </div>
       </div>
