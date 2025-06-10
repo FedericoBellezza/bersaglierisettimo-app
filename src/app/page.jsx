@@ -5,6 +5,7 @@ import RimaniAggiornato from "@/components/RimaniAggiornato";
 import VieniASuonare from "@/components/VieniASuonare";
 import EventsSection from "@/components/InfoSection";
 import ProssimiEventi from "@/components/ProssimiEventi";
+import BandoRegionale from "@/components/BandoRegionale";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
       <ChiSiamo />
       <EventsSection />
       <RimaniAggiornato />
-
+      <BandoRegionale />
       <VieniASuonare />
     </div>
   );
