@@ -10,6 +10,7 @@ import {
   FaGraduationCap,
   FaUsers,
 } from "react-icons/fa";
+import Link from "next/link";
 
 const VieniASuonare = () => {
   const sectionRef = useRef(null);
@@ -100,7 +101,7 @@ const VieniASuonare = () => {
               {/* Card Header */}
               <div className="relative overflow-hidden">
                 <img
-                  src="/suona-con-noi.jpg"
+                  src="/suona-con-noi-orizzontale.jpeg"
                   alt="Lezione di musica"
                   className="w-full h-48 sm:h-60 md:h-72 object-cover object-center"
                 />
@@ -378,8 +379,8 @@ const VieniASuonare = () => {
               whileTap={{ scale: 0.97 }}
               className="inline-block"
             >
-              <a
-                href="#contatti"
+              <Link
+                href="/contatti"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 className="relative overflow-hidden inline-flex items-center px-8 py-3 bg-yellow-400 text-red-900 font-bold rounded-none group"
@@ -406,18 +407,18 @@ const VieniASuonare = () => {
                     />
                   </svg>
                 </span>
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
 
           {/* Mobile CTA Button - Only visible on mobile */}
           <motion.div variants={itemVariants} className="lg:hidden mt-6">
-            <a
-              href="#contatti"
+            <Link
+              href="/contatti"
               className="block w-full bg-yellow-400 text-red-900 font-bold text-center py-3 px-6 text-sm"
             >
               UNISCITI A NOI
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

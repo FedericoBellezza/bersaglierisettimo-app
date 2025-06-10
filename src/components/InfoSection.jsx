@@ -193,27 +193,7 @@ const InfoSection = ({
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-            >
-              <a
-                href="#"
-                className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-medium transition-all duration-300 group hover:bg-red-700"
-              >
-                Scopri di più
-                <svg
-                  className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </a>
-            </motion.div>
+            ></motion.div>
           </motion.div>
         </div>
       </div>
