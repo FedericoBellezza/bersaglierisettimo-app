@@ -6,6 +6,7 @@ import VieniASuonare from "@/components/VieniASuonare";
 import EventsSection from "@/components/InfoSection";
 import ProssimiEventi from "@/components/ProssimiEventi";
 import BandoRegionale from "@/components/BandoRegionale";
+import Anniversario from "@/components/Anniversario";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Hero />
       <ProssimiEventi />
       <ChiSiamo />
+      <Anniversario />
       <EventsSection />
       <RimaniAggiornato />
       <BandoRegionale />

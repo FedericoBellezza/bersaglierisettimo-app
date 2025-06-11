@@ -23,9 +23,8 @@ const Footer = () => {
       links: [
         { name: "Home", href: "/" },
         { name: "Chi Siamo", href: "#chi-siamo" },
-        { name: "Eventi", href: "#eventi" },
-        { name: "Galleria", href: "#galleria" },
-        { name: "Contatti", href: "#contatti" },
+        { name: "Calendario", href: "/calendario" },
+        { name: "Contatti", href: "/contatti" },
       ],
     },
   ];
@@ -117,7 +116,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 text-sm mb-6">
-              Dal 1972 portiamo avanti la tradizione musicale dei Bersaglieri,{" "}
+              Dal 1995 portiamo avanti la tradizione musicale dei Bersaglieri,{" "}
               <br />
               partecipando a eventi, manifestazioni e cerimonie ufficiali in
               tutta Italia.
@@ -195,7 +194,7 @@ const Footer = () => {
             </ul>
 
             {/* Newsletter Form (Compact version) */}
-            <div className="mt-6 pt-6 border-t border-gray-800">
+            {/* <div className="mt-6 pt-6 border-t border-gray-800">
               <h4 className="text-sm font-medium text-white mb-3">
                 Iscriviti alla newsletter
               </h4>
@@ -209,7 +208,7 @@ const Footer = () => {
                   Invia
                 </button>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         </div>
 

@@ -163,7 +163,7 @@ const VieniASuonare = () => {
                             Sede
                           </h4>
                           <p className="text-gray-700 text-xs">
-                            Via Boccanelli, 8
+                            Via Buonarroti, 8
                           </p>
                         </div>
 
@@ -279,7 +279,7 @@ const VieniASuonare = () => {
                           </ul>
                         </div>
 
-                        <div className="bg-red-50 p-4 rounded-lg">
+                        {/* <div className="bg-red-50 p-4 rounded-lg">
                           <h5 className="font-bold text-red-900 mb-2 text-sm">
                             Prossimo open day:
                           </h5>
@@ -292,7 +292,7 @@ const VieniASuonare = () => {
                           >
                             Prenota il tuo posto
                           </a>
-                        </div>
+                        </div> */}
                       </div>
                     </motion.div>
                   )}
