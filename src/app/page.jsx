@@ -16,7 +16,7 @@ export default function HomePage() {
       <ChiSiamo />
       <Anniversario />
       <EventsSection />
-      <RimaniAggiornato />
+      {/* <RimaniAggiornato /> */}
       <BandoRegionale />
       <VieniASuonare />
     </div>
