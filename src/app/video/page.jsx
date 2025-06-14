@@ -293,7 +293,7 @@ export default function Video() {
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="#contatti"
+              href="/contatti"
               className="bg-transparent text-white px-6 py-3 font-medium border border-white hover:bg-white hover:text-red-600 transition-colors"
             >
               Contattaci
