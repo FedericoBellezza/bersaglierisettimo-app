@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bersaglieri Settimo Torinese - Sito Web Ufficiale
 
-## Getting Started
+<!-- ![Logo Bersaglieri](/public/logo-bersaglieri.svg) -->
+<img src="./public/logo-bersaglieri.svg" alt="Logo Bersaglieri" width="150" height="auto">
 
-First, run the development server:
+## Descrizione
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Questo è il repository del sito web ufficiale della Fanfara Bersaglieri di Settimo Torinese. Il sito è sviluppato utilizzando Next.js, un framework React moderno, e offre una piattaforma digitale per la storica fanfara, permettendo di condividere informazioni, eventi e contenuti multimediali con il pubblico.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Caratteristiche
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Homepage**: Presentazione della fanfara con sezioni informative
+- **Chi Siamo**: Storia e informazioni sulla fanfara
+- **Calendario Eventi**: Visualizzazione degli eventi passati e futuri
+- **Sezione "Vieni a Suonare"**: Informazioni per chi desidera unirsi alla fanfara
+- **Galleria Multimediale**: Foto e video delle esibizioni
+- **Contatti**: Informazioni per contattare la fanfara
+- **Design Responsive**: Ottimizzato per dispositivi mobili e desktop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologie Utilizzate
 
-## Learn More
+- **Next.js 15**: Framework React per applicazioni web
+- **React 19**: Libreria JavaScript per interfacce utente
+- **Tailwind CSS**: Framework CSS utility-first per lo styling
+- **Framer Motion**: Libreria per animazioni fluide
+- **Radix UI**: Componenti accessibili e personalizzabili
 
-To learn more about Next.js, take a look at the following resources:
+## Licenza
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Questo progetto è proprietario e i diritti sono riservati alla Fanfara Bersaglieri di Settimo Torinese.
