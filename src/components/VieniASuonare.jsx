@@ -173,7 +173,7 @@ const VieniASuonare = () => {
                             Contatti
                           </h4>
                           <p className="text-gray-700 text-xs">
-                            +39 338 615 9785
+                            +39 339 615 9785
                           </p>
                         </div>
                       </div>
