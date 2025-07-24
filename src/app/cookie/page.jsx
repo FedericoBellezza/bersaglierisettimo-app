@@ -24,17 +24,25 @@ const CookiePolicy = () => {
 
   // Check if cookie consent has been given before
   useEffect(() => {
-    // Check after a short delay to ensure hydration is complete
-    const timer = setTimeout(() => {
-      const consent = localStorage.getItem("cookieConsent");
-      if (!consent) {
-        setShowBanner(true);
-      } else {
-        setCookiePreferences(JSON.parse(consent));
-      }
-    }, 1000);
+    const consent = localStorage.getItem("cookieConsent");
+    if (!consent) {
+      setShowBanner(true);
+    } else {
+      setCookiePreferences(JSON.parse(consent));
+    }
+  }, []);
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    const handleOpenSettings = () => {
+      setShowBanner(true);
+      setShowSettings(true);
+    };
+
+    window.addEventListener("openCookieSettings", handleOpenSettings);
+
+    return () => {
+      window.removeEventListener("openCookieSettings", handleOpenSettings);
+    };
   }, []);
 
   const acceptAllCookies = () => {
@@ -109,6 +117,37 @@ const CookiePolicy = () => {
               web.
             </p>
 
+            <h2 className="text-2xl font-bold mt-10 mb-4">
+              Titolare del Trattamento dei Dati
+            </h2>
+            <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 mb-8">
+              <p className="font-bold text-white">
+                A.N.B. Sezione "M.A. Fausto Balbo" Settimo Torinese
+              </p>
+              <p className="text-gray-300">
+                Via Galileo Ferraris 6, 10036 Settimo Torinese (TO)
+              </p>
+              <p className="text-gray-300">Codice Fiscale: 97539850012</p>
+              <p className="mt-2">
+                <span className="font-medium">Email:</span>{" "}
+                <a
+                  href="mailto:fanfarasettimotorinese@gmail.com"
+                  className="text-red-400 hover:underline"
+                >
+                  fanfarasettimotorinese@gmail.com
+                </a>
+              </p>
+              <p>
+                <span className="font-medium">PEC:</span>{" "}
+                <a
+                  href="mailto:anbsettimotorinese@pec.it"
+                  className="text-red-400 hover:underline"
+                >
+                  anbsettimotorinese@pec.it
+                </a>
+              </p>
+            </div>
+
             <h2 className="text-2xl font-bold mt-10 mb-4 ">
               Cosa sono i cookie?
             </h2>
@@ -131,22 +170,71 @@ const CookiePolicy = () => {
             </p>
 
             <h3 className="text-xl font-semibold mt-8 mb-3 ">
-              Tipi di cookie che utilizziamo
+              Dettaglio dei cookie utilizzati
             </h3>
 
-            <div className="space-y-6 mb-10">
-              {cookieTypes.map((type) => (
-                <div
-                  key={type.id}
-                  className="bg-gray-50 p-5 rounded-lg border border-gray-200"
-                >
-                  <h4 className="font-bold text-lg text-gray-800 mb-2">
-                    {type.name}
-                  </h4>
-                  <p className="text-gray-800 text-base">{type.description}</p>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white text-gray-800 rounded-lg">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="py-2 px-4 text-left">Nome Cookie</th>
+                    <th className="py-2 px-4 text-left">Fornitore</th>
+                    <th className="py-2 px-4 text-left">Scopo</th>
+                    <th className="py-2 px-4 text-left">Durata</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td colSpan="4" className="py-2 px-4 font-bold bg-gray-100">
+                      Cookie Tecnici (Sempre attivi)
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4">cookieConsent</td>
+                    <td className="py-2 px-4">Questo sito</td>
+                    <td className="py-2 px-4">
+                      Memorizza le preferenze di consenso ai cookie dell'utente.
+                    </td>
+                    <td className="py-2 px-4">1 anno</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td colSpan="4" className="py-2 px-4 font-bold bg-gray-100">
+                      Cookie Analitici (soggetti a consenso)
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4">v</td>
+                    <td className="py-2 px-4">Vercel</td>
+                    <td className="py-2 px-4">
+                      Utilizzato da Vercel Speed Insights per misurare le
+                      performance del sito.
+                    </td>
+                    <td className="py-2 px-4">Sessione</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td colSpan="4" className="py-2 px-4 font-bold bg-gray-100">
+                      Cookie di Terze Parti (soggetti a consenso)
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4">NID, CONSENT</td>
+                    <td className="py-2 px-4">Google LLC</td>
+                    <td className="py-2 px-4">
+                      Utilizzati da Google Maps per mostrare mappe interattive e
+                      per memorizzare le preferenze dell'utente.
+                    </td>
+                    <td className="py-2 px-4">Variabile (fino a 6 mesi)</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <p className="text-sm text-gray-400 mt-4">
+              I collegamenti ai social network (Facebook, Instagram, etc.) sono
+              semplici link esterni e non installano cookie di profilazione
+              finché non vengono cliccati e non si visita il sito di
+              destinazione. Per maggiori informazioni, si prega di consultare le
+              privacy policy dei rispettivi social network.
+            </p>
 
             <h2 className="text-2xl font-bold mt-10 mb-4 ">
               Come gestire i cookie

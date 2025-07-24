@@ -234,6 +234,14 @@ const Footer = () => {
             >
               Cookie Policy
             </Link>
+            <button
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("openCookieSettings"))
+              }
+              className="text-gray-500 hover:text-white transition-colors"
+            >
+              Gestisci Cookie
+            </button>
             <span className="text-gray-600">
               Sviluppato con ♥ da{" "}
               <span

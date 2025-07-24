@@ -61,12 +61,54 @@ const PrivacyPolicy = () => {
               tracciare l'attività sul nostro servizio e conservare determinate
               informazioni. Per maggiori dettagli sui cookie utilizzati,
               consultare la nostra{" "}
-              <a href="/cookie-policy" className="text-red-400 hover:underline">
+              <a href="/cookie" className="text-red-400 hover:underline">
                 Cookie Policy
               </a>
               .
             </li>
           </ul>
+        </>
+      ),
+    },
+    {
+      id: "titolare",
+      title: "Titolare del Trattamento dei Dati",
+      content: (
+        <>
+          <p className="mb-4">
+            Il Titolare del Trattamento dei Dati raccolti tramite questo sito è:
+          </p>
+          <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <p className="font-bold text-white">
+              A.N.B. Sezione "M.A. Fausto Balbo" Settimo Torinese
+            </p>
+            <p className="text-gray-300">
+              Via Galileo Ferraris 6, 10036 Settimo Torinese (TO)
+            </p>
+            <p className="text-gray-300">Codice Fiscale: 97539850012</p>
+            <p className="mt-2">
+              <span className="font-medium">Email:</span>{" "}
+              <a
+                href="mailto:fanfarasettimotorinese@gmail.com"
+                className="text-red-400 hover:underline"
+              >
+                fanfarasettimotorinese@gmail.com
+              </a>
+            </p>
+            <p>
+              <span className="font-medium">PEC:</span>{" "}
+              <a
+                href="mailto:anbsettimotorinese@pec.it"
+                className="text-red-400 hover:underline"
+              >
+                anbsettimotorinese@pec.it
+              </a>
+            </p>
+          </div>
+          <p className="mt-4">
+            Per qualsiasi domanda o per esercitare i tuoi diritti, puoi
+            contattare il Titolare ai recapiti sopra indicati.
+          </p>
         </>
       ),
     },
