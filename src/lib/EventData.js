@@ -1,7 +1,7 @@
 const events = [
   {
     id: 1,
-    title: "Concerto",
+    title: "Concerto Villastellone",
     date: "13 Settembre 2025",
     month: "Settembre",
     year: "2025",
@@ -23,7 +23,7 @@ const events = [
     description: "Raduno provincia di Torino.",
     image:
       "https://static.wixstatic.com/media/a01c56_fb44292d22434cc58c44181e6d5fec1b~mv2.jpg/v1/fill/w_953,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif/a01c56_fb44292d22434cc58c44181e6d5fec1b~mv2.jpg",
-    type: "raduno",
+    type: "Raduno",
     startTime: "09:00",
     endTime: "16:00",
   },

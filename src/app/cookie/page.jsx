@@ -198,12 +198,9 @@ const CookiePolicy = () => {
             <p className="text-gray-300 mb-10">
               Se hai domande sulla nostra Cookie Policy, non esitare a
               contattarci all'indirizzo email:{" "}
-              <a
-                href="mailto:bersaglierisettimo@gmail.com"
-                className="text-red-400 hover:underline"
-              >
-                bersaglierisettimo@gmail.com
-              </a>
+              <span className="text-red-400 ">
+                fanfarasettimotorinese@gmail.com
+              </span>
             </p>
 
             <div className="mt-12 border-t border-gray-200 pt-8">

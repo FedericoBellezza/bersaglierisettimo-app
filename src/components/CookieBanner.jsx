@@ -18,6 +18,17 @@ const CookieBanner = () => {
     if (!consent) {
       setShowBanner(true);
     }
+
+    const handleOpenSettings = () => {
+      setShowBanner(true);
+      setShowSettings(true);
+    };
+
+    window.addEventListener("openCookieSettings", handleOpenSettings);
+
+    return () => {
+      window.removeEventListener("openCookieSettings", handleOpenSettings);
+    };
   }, []);
 
   const handleAcceptAll = () => {
@@ -41,15 +52,9 @@ const CookieBanner = () => {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {showBanner && (
-        <motion.div
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-4 right-4 z-50 w-full max-w-md"
-        >
+        <div className="fixed bottom-4 right-4 z-50 w-full max-w-md">
           <div className="bg-white rounded-lg shadow-2xl border border-gray-200">
             {showSettings ? (
               <CookieSettings
@@ -65,9 +70,9 @@ const CookieBanner = () => {
               />
             )}
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 

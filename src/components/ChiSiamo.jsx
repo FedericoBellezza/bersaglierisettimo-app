@@ -7,6 +7,7 @@ import {
   MapPinIcon,
   CalendarDaysIcon,
 } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const ChiSiamo = () => {
   const sectionRef = useRef(null);
@@ -46,7 +47,7 @@ const ChiSiamo = () => {
             La Nostra Storia
           </h2>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-            Passione, tradizione e musica che corrono insieme dal 1972.
+            Passione, tradizione e musica che corrono insieme dal 1995.
           </p>
         </motion.div>
 
@@ -82,14 +83,14 @@ const ChiSiamo = () => {
           >
             <InfoItem
               icon={<CalendarDaysIcon className="w-7 h-7 text-red-600" />}
-              label="Anno di fondazione"
-              value="1972"
+              label="Anno di ricostituzione"
+              value="1995"
             />
             <InfoItem
               icon={<AtSymbolIcon className="w-7 h-7 text-red-600" />}
               label="Email"
               value="fanfarasettimotorinese@gmail.com"
-              isLink={`mailto:fanfarasettimotorinese@gmail.com`}
+              // isLink={`mailto:fanfarasettimotorinese@gmail.com`}
             />
             <InfoItem
               icon={<MapPinIcon className="w-7 h-7 text-red-600" />}
@@ -97,8 +98,12 @@ const ChiSiamo = () => {
               value="Via Buonarroti, 8 - Settimo T.se"
               isLink="https://www.google.it/maps/place/Via+Buonarroti,+8,+10036+Settimo+Torinese+TO"
             />
-            <Button asChild size="lg" className="w-full mt-6">
-              <a href="#contatti">Entra in contatto con noi</a>
+            <Button
+              asChild
+              size="lg"
+              className="w-full mt-6 bg-red-600 text-white hover:bg-red-500 transition-colors duration-300"
+            >
+              <Link href="/contatti">Entra in contatto con noi</Link>
             </Button>
           </motion.div>
         </motion.div>

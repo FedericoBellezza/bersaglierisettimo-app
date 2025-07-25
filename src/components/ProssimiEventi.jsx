@@ -145,7 +145,13 @@ const ProssimiEventi = () => {
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg">
+          <Button
+            asChild
+            size="lg"
+            className={
+              "bg-red-600 text-white hover:bg-red-500 transition-colors duration-300"
+            }
+          >
             <Link href="/calendario">
               Vedi tutti gli eventi
               <span aria-hidden="true" className="ml-2">

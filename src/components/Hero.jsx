@@ -32,11 +32,11 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="mt-6 max-w-2xl text-lg sm:text-xl md:text-2xl text-gray-200 font-light"
         >
-          Musica, passione e storia dal 1993. Unisciti a noi e vivi l'emozione
-          della nostra musica.
+          Musica, passione e storia dal 1995. <br /> Unisciti a noi e vivi
+          l'emozione della nostra musica.
         </motion.p>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
@@ -55,7 +55,7 @@ const Hero = () => {
           >
             Contattaci
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
