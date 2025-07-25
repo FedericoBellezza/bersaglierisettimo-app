@@ -4,6 +4,7 @@ import "../fontello-bersaglieri/css/fontello.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import CookieBanner from "@/components/CookieBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         {children}
         <Analytics />
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
