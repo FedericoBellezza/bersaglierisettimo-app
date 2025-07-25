@@ -1,19 +1,18 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { Button } from "./ui/button";
 import events from "../lib/EventData.js";
+import {
+  CalendarIcon,
+  ClockIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
 
 const ProssimiEventi = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
 
   const monthMap = {
     Gennaio: 0,
@@ -43,18 +42,19 @@ const ProssimiEventi = () => {
     .sort((a, b) => a.dateObject - b.dateObject)
     .slice(0, 3);
 
-  // Animation variants
   const containerVariants = {
-    hidden: {},
+    hidden: { opacity: 0 },
     visible: {
+      opacity: 1,
       transition: {
         staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -69,107 +69,66 @@ const ProssimiEventi = () => {
     <section
       id="prossimi-eventi"
       ref={sectionRef}
-      className="py-16 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden"
+      className="py-20 sm:py-28 bg-gray-50"
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute -right-32 -top-32 w-64 h-64 bg-red-600 opacity-5 rounded-full blur-3xl"></div>
-        <div className="absolute -left-32 -bottom-32 w-64 h-64 bg-yellow-400 opacity-5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
+      <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-3">
-            Prossimi <span className="text-red-600">Eventi</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+            Prossimi Eventi
           </h2>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-24 h-1 bg-red-600 mx-auto mb-4"
-          ></motion.div>
-          <p className="max-w-2xl text-balance mx-auto text-lg text-gray-600">
-            Scopri dove potrai ascoltare la Fanfara Bersaglieri di Settimo
-            Torinese nei prossimi mesi
+          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+            Seguici dal vivo nei nostri prossimi appuntamenti. La nostra musica
+            non si ferma mai!
           </p>
         </motion.div>
 
-        {/* Events grid layout */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {upcomingEvents.map((event) => (
             <motion.div
               key={event.id}
               variants={itemVariants}
-              className="bg-white shadow-md hover:shadow-lg transition-shadow flex flex-col h-full"
+              className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
+              <div className="relative">
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-48 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 text-sm font-medium">
-                  {event.date}
-                </div>
-                <div className="absolute top-4 right-4 bg-gray-800 text-white px-3 py-1 text-sm font-medium">
+                <div className="absolute top-4 left-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
                   {event.type}
                 </div>
               </div>
 
-              <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                <p className="text-gray-600 mb-4">{event.description}</p>
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {event.title}
+                </h3>
+                <p className="text-gray-600 mb-4 flex-grow">
+                  {event.description}
+                </p>
 
-                <div className="mt-auto space-y-2 text-sm">
-                  <div className="flex items-center text-gray-700">
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      ></path>
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      ></path>
-                    </svg>
+                <div className="mt-auto space-y-3 text-sm text-gray-700">
+                  <div className="flex items-center">
+                    <CalendarIcon className="w-5 h-5 mr-3 text-red-600" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPinIcon className="w-5 h-5 mr-3 text-red-600" />
                     <span>{event.location}</span>
                   </div>
-
-                  <div className="flex items-center text-gray-700">
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
+                  <div className="flex items-center">
+                    <ClockIcon className="w-5 h-5 mr-3 text-red-600" />
                     <span>
                       {event.startTime} - {event.endTime}
                     </span>
@@ -180,32 +139,20 @@ const ProssimiEventi = () => {
           ))}
         </motion.div>
 
-        {/* Call to action */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mt-10"
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className="text-center mt-12"
         >
-          <Link
-            href="/calendario"
-            className="inline-flex items-center px-8 py-3 bg-red-600 text-white font-medium rounded-none hover:bg-red-700 transition-colors duration-300 group"
-          >
-            Visualizza calendario completo
-            <svg
-              className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              ></path>
-            </svg>
-          </Link>
+          <Button asChild size="lg">
+            <Link href="/calendario">
+              Vedi tutti gli eventi
+              <span aria-hidden="true" className="ml-2">
+                →
+              </span>
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

@@ -1,239 +1,153 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaCookieBite,
-  FaTimes,
-  FaCheck,
-  FaToggleOn,
-  FaToggleOff,
-} from "react-icons/fa";
+import { Button } from "./ui/button";
+import { CookieIcon, SettingsIcon, XIcon } from "lucide-react";
 
 const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [cookiePreferences, setCookiePreferences] = useState({
-    necessary: true, // Always enabled
+  const [preferences, setPreferences] = useState({
+    necessary: true,
     analytics: false,
     marketing: false,
-    preferences: false,
   });
 
-  // Check if cookie consent has been given before
   useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
+    const consent = localStorage.getItem("cookie_consent");
     if (!consent) {
       setShowBanner(true);
-    } else {
-      setCookiePreferences(JSON.parse(consent));
     }
   }, []);
 
-  useEffect(() => {
-    const handleOpenSettings = () => {
-      setShowBanner(true);
-      setShowSettings(true);
-    };
-
-    window.addEventListener("openCookieSettings", handleOpenSettings);
-
-    return () => {
-      window.removeEventListener("openCookieSettings", handleOpenSettings);
-    };
-  }, []);
-
-  const acceptAllCookies = () => {
-    const allAccepted = {
+  const handleAcceptAll = () => {
+    const newPreferences = {
       necessary: true,
       analytics: true,
       marketing: true,
-      preferences: true,
     };
-
-    setCookiePreferences(allAccepted);
-    localStorage.setItem("cookieConsent", JSON.stringify(allAccepted));
+    setPreferences(newPreferences);
+    localStorage.setItem("cookie_consent", JSON.stringify(newPreferences));
     setShowBanner(false);
   };
 
-  const acceptSelectedCookies = () => {
-    localStorage.setItem("cookieConsent", JSON.stringify(cookiePreferences));
+  const handleSavePreferences = () => {
+    localStorage.setItem("cookie_consent", JSON.stringify(preferences));
     setShowBanner(false);
   };
 
-  const toggleCookieType = (type) => {
-    if (type === "necessary") return; // Can't toggle necessary cookies
-
-    setCookiePreferences((prev) => ({
-      ...prev,
-      [type]: !prev[type],
-    }));
+  const togglePreference = (key) => {
+    setPreferences((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-
-  const cookieTypes = [
-    {
-      id: "necessary",
-      name: "Necessari",
-      description:
-        "I cookie necessari sono essenziali per il funzionamento del sito web. Questi cookie garantiscono le funzionalità di base e le caratteristiche di sicurezza del sito web.",
-      canDisable: false,
-    },
-    {
-      id: "analytics",
-      name: "Analitici",
-      description:
-        "I cookie analitici ci aiutano a capire come utilizzi il nostro sito web, quali pagine sono più popolari e come ti muovi all'interno del sito. Questi dati ci aiutano a migliorare la tua esperienza di navigazione.",
-      canDisable: true,
-    },
-    {
-      id: "marketing",
-      name: "Marketing",
-      description:
-        "I cookie di marketing vengono utilizzati per tracciare i visitatori sui siti web. L'intento è quello di mostrare annunci pertinenti e coinvolgenti per il singolo utente.",
-      canDisable: true,
-    },
-    {
-      id: "preferences",
-      name: "Preferenze",
-      description:
-        "I cookie di preferenza consentono al sito web di ricordare informazioni che modificano il modo in cui il sito si comporta o appare, come la tua lingua preferita o la regione in cui ti trovi.",
-      canDisable: true,
-    },
-  ];
 
   return (
-    <>
-      {/* Cookie Consent Banner */}
-      <AnimatePresence>
-        {showBanner && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-lg border-t border-gray-200"
-          >
-            {!showSettings ? (
-              <div className="container mx-auto p-4 md:p-6">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-                  <div className="flex items-start mb-4 md:mb-0 pr-8">
-                    <div className="hidden sm:block">
-                      <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mr-4 flex-shrink-0">
-                        <FaCookieBite className="text-red-400 text-xl" />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="font-bold  text-lg mb-1">
-                        Utilizziamo i cookie
-                      </h3>
-                      <p className="text-gray-700 text-sm md:text-base">
-                        Questo sito utilizza cookie per migliorare la tua
-                        esperienza. Puoi personalizzare le tue preferenze o
-                        accettare tutti i cookie.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-3 w-full md:w-auto">
-                    <button
-                      onClick={() => setShowSettings(true)}
-                      className="px-4 py-2 border border-gray-500 text-gray-500 cursor-pointer rounded-md hover:bg-gray-100 transition-colors text-sm md:text-base flex-grow md:flex-grow-0"
-                    >
-                      Personalizza
-                    </button>
-                    <button
-                      onClick={acceptSelectedCookies}
-                      className="px-4 py-2 border border-red-700 text-red-500 cursor-pointer rounded-md hover:bg-red-100 transition-colors text-sm md:text-base flex-grow md:flex-grow-0"
-                    >
-                      Solo necessari
-                    </button>
-                    <button
-                      onClick={acceptAllCookies}
-                      className="px-4 py-2 bg-red-700 text-white rounded-md cursor-pointer hover:bg-red-800 transition-colors text-sm md:text-base flex-grow md:flex-grow-0"
-                    >
-                      Accetta tutti
-                    </button>
-                  </div>
-                </div>
-              </div>
+    <AnimatePresence>
+      {showBanner && (
+        <motion.div
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="fixed bottom-4 right-4 z-50 w-full max-w-md"
+        >
+          <div className="bg-white rounded-lg shadow-2xl border border-gray-200">
+            {showSettings ? (
+              <CookieSettings
+                preferences={preferences}
+                togglePreference={togglePreference}
+                onSave={handleSavePreferences}
+                onBack={() => setShowSettings(false)}
+              />
             ) : (
-              <div className="container mx-auto p-4 md:p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="font-bold  text-xl">Impostazioni Cookie</h3>
-                  <button
-                    onClick={() => setShowSettings(false)}
-                    className="text-gray-500 cursor-pointer hover:text-gray-300"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-
-                <div className="mb-6">
-                  <p className="text-gray-700 mb-4">
-                    Seleziona quali cookie desideri accettare. I cookie
-                    necessari non possono essere disattivati in quanto sono
-                    essenziali per il funzionamento del sito.
-                  </p>
-                </div>
-
-                <div className="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2">
-                  {cookieTypes.map((type) => (
-                    <div
-                      key={type.id}
-                      className="bg-gray-50 p-4 rounded-lg border border-gray-200"
-                    >
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="font-semibold ">{type.name}</div>
-                        <button
-                          onClick={() => toggleCookieType(type.id)}
-                          disabled={!type.canDisable}
-                          className={`text-xl ${
-                            !type.canDisable
-                              ? "text-gray-400 cursor-not-allowed"
-                              : cookiePreferences[type.id]
-                              ? "text-green-500 cursor-pointer"
-                              : "text-gray-400 cursor-pointer"
-                          }`}
-                        >
-                          {cookiePreferences[type.id] ? (
-                            <FaToggleOn />
-                          ) : (
-                            <FaToggleOff />
-                          )}
-                        </button>
-                      </div>
-                      <p className="text-gray-700 text-sm">
-                        {type.description}
-                      </p>
-                      {!type.canDisable && (
-                        <div className="mt-2 text-xs text-gray-500 flex items-center">
-                          <FaCheck className="mr-1" /> Sempre attivo
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex justify-end space-x-3 border-t border-gray-200 pt-4">
-                  <button
-                    onClick={acceptSelectedCookies}
-                    className="px-6 py-2 bg-red-700 text-white rounded-md hover:bg-red-800 transition-colors cursor-pointer"
-                  >
-                    Salva preferenze
-                  </button>
-                  <button
-                    onClick={acceptAllCookies}
-                    className="px-6 py-2 border border-red-700 text-red-400 rounded-md hover:bg-red-100 transition-colors cursor-pointer"
-                  >
-                    Accetta tutti
-                  </button>
-                </div>
-              </div>
+              <CookieConsent
+                onAcceptAll={handleAcceptAll}
+                onCustomize={() => setShowSettings(true)}
+              />
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
+
+const CookieConsent = ({ onAcceptAll, onCustomize }) => (
+  <div className="p-6">
+    <div className="flex items-start gap-4">
+      <CookieIcon className="w-8 h-8 text-yellow-500 flex-shrink-0 mt-1" />
+      <div>
+        <h3 className="text-lg font-semibold">Informativa sui Cookie</h3>
+        <p className="text-sm text-gray-600 mt-1">
+          Utilizziamo i cookie per migliorare la tua esperienza sul nostro sito.
+        </p>
+      </div>
+    </div>
+    <div className="flex gap-3 mt-4">
+      <Button onClick={onAcceptAll} className="flex-1">
+        Accetta Tutti
+      </Button>
+      <Button onClick={onCustomize} variant="outline" className="flex-1">
+        Personalizza
+      </Button>
+    </div>
+  </div>
+);
+
+const CookieSettings = ({ preferences, togglePreference, onSave, onBack }) => (
+  <div className="p-6">
+    <div className="flex justify-between items-center mb-4">
+      <h3 className="text-lg font-semibold">Personalizza Cookie</h3>
+      <Button onClick={onBack} variant="ghost" size="icon">
+        <XIcon className="w-5 h-5" />
+      </Button>
+    </div>
+    <div className="space-y-4">
+      <CookieToggle
+        title="Cookie Necessari"
+        description="Essenziali per il funzionamento del sito."
+        enabled={true}
+        onToggle={() => {}}
+        disabled={true}
+      />
+      <CookieToggle
+        title="Cookie Analitici"
+        description="Ci aiutano a capire come usi il sito per migliorarlo."
+        enabled={preferences.analytics}
+        onToggle={() => togglePreference("analytics")}
+      />
+      <CookieToggle
+        title="Cookie di Marketing"
+        description="Usati per mostrarti annunci pertinenti."
+        enabled={preferences.marketing}
+        onToggle={() => togglePreference("marketing")}
+      />
+    </div>
+    <Button onClick={onSave} className="w-full mt-6">
+      Salva Preferenze
+    </Button>
+  </div>
+);
+
+const CookieToggle = ({ title, description, enabled, onToggle, disabled }) => (
+  <div className="flex items-start justify-between p-3 bg-gray-50 rounded-md">
+    <div className="pr-4">
+      <h4 className="font-semibold">{title}</h4>
+      <p className="text-sm text-gray-600">{description}</p>
+    </div>
+    <button
+      onClick={onToggle}
+      disabled={disabled}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+        enabled ? "bg-red-600" : "bg-gray-300"
+      } ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+          enabled ? "translate-x-6" : "translate-x-1"
+        }`}
+      />
+    </button>
+  </div>
+);
 
 export default CookieBanner;

@@ -1,97 +1,62 @@
 "use client";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const Hero = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
-    <section className="relative h-210 overflow-hidden bg-black">
-      {/* Background image with minimal treatment */}
+    <section className="relative h-[90vh] min-h-[600px] overflow-hidden bg-gray-900 text-white">
       <div
-        className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
+        className="absolute inset-0 bg-cover bg-bottom z-0 opacity-40"
         style={{
-          backgroundImage: `url('https://static.wixstatic.com/media/a01c56_8ff32b43d7b94960b9d1b408e2cf5de1~mv2.jpg/v1/fill/w_1905,h_577,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a01c56_8ff32b43d7b94960b9d1b408e2cf5de1~mv2.jpg')`,
+          backgroundImage: `url('/sfilata2.avif')`,
         }}
       />
-
-      {/* Simple gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10" />
-
-      {/* Clean, minimal layout */}
-      <div className="relative z-20 flex flex-col h-full justify-center items-center px-6">
-        {/* Logo - small and elegant */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent z-10" />
+      <div className="relative z-20 flex flex-col h-full justify-center items-center text-center px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-8"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <img
-            src="/logo-bersaglieri.svg"
-            className="h-16 md:h-20 w-auto"
-            alt="Logo Fanfara Bersaglieri"
-          />
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter leading-tight">
+            Fanfara Bersaglieri
+          </h1>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-yellow-400 mt-2">
+            Settimo Torinese
+          </h2>
         </motion.div>
 
-        {/* Title with clean typography */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-center"
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="mt-6 max-w-2xl text-lg sm:text-xl md:text-2xl text-gray-200 font-light"
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight">
-            FANFARA
-          </h1>
-          <h2 className="text-5xl md:text-7xl font-bold text-yellow-400 tracking-tight mt-2">
-            BERSAGLIERI
-          </h2>
-          <div className="w-16 h-[1px] bg-red-600 mx-auto my-6"></div>
-          <p className="text-xl md:text-2xl font-light uppercase tracking-widest text-white">
-            SETTIMO TORINESE
-          </p>
+          Musica, passione e storia dal 1993. Unisciti a noi e vivi l'emozione
+          della nostra musica.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+          className="mt-8 flex flex-col sm:flex-row gap-4"
+        >
+          <Button
+            size="lg"
+            className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105"
+          >
+            Scopri di più
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105"
+          >
+            Contattaci
+          </Button>
         </motion.div>
       </div>
-
-      {/* Minimal scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "loop",
-            ease: "easeInOut",
-          }}
-        >
-          <svg
-            width="16"
-            height="24"
-            viewBox="0 0 16 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 4L8 20M8 20L2 14M8 20L14 14"
-              stroke="white"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
