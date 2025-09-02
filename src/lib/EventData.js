@@ -11,6 +11,7 @@ const events = [
     type: "Concerto",
     startTime: "21:00",
     endTime: "23:00",
+    locandina: "locandina-villastellone.jpg",
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const events = [
     type: "Raduno",
     startTime: "09:00",
     endTime: "16:00",
+    locandina: "locandina-villastellone.jpg",
   },
   {
     id: 3,

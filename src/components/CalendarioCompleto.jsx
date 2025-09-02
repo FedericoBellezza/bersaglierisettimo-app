@@ -186,16 +186,27 @@ const CalendarioCompleto = () => {
                             }`}
                           />
                         </div>
-                        <div className="mt-4 pt-4 border-t border-gray-200">
+                        <div className="mt-4 pt-4 border-t border-gray-200 flex space-x-2 items-center">
                           <Button
                             onClick={() => aggiungiAlCalendario(event)}
                             size="sm"
                             variant="ghost"
-                            className="text-red-600 hover:bg-red-50"
+                            className="text-red-600 hover:bg-red-50 cursor-pointer"
                           >
                             <PlusIcon className="w-4 h-4 mr-2" />
                             Aggiungi al calendario
                           </Button>
+                          {event.locandina && (
+                            <Button
+                              onClick={() =>
+                                window.open(event.locandina, "_blank")
+                              }
+                              className="text-red-600 hover:bg-red-50 cursor-pointer"
+                              variant="ghost"
+                            >
+                              Vedi locandina
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </motion.div>
