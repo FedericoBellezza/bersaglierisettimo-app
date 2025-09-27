@@ -39,6 +39,7 @@ const events = [
     type: "Serata musicale",
     startTime: "21:00",
     endTime: null,
+    locandina: "30poster.jpg",
   },
   {
     id: 4,
