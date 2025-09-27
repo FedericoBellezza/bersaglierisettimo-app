@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { CookieIcon, SettingsIcon, XIcon } from "lucide-react";
+import { CookieIcon, XIcon } from "lucide-react";
 
 const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);

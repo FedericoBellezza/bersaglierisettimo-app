@@ -1,12 +1,14 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { Button } from "./ui/button";
+import PosterOnOpen from "./PosterOnOpen";
 
 export default function Anniversario() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const [showPoster, setShowPoster] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -72,12 +74,15 @@ export default function Anniversario() {
 
           <motion.div variants={itemVariants} className="mt-10">
             <Button asChild size="lg">
-              <Link href="/calendario">
-                Scopri gli eventi del 30°
+              <span
+                className="cursor-pointer"
+                onClick={() => window.open("./30poster.jpg")}
+              >
+                Vedi locandina del 30°
                 <span aria-hidden="true" className="ml-2">
                   →
                 </span>
-              </Link>
+              </span>
             </Button>
           </motion.div>
         </motion.div>
