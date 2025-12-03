@@ -23,8 +23,8 @@ export default function PosterOnOpen({ value }) {
               <Image
                 height={500}
                 width={600}
-                src={"/30poster.jpg"}
-                alt="Locandina 30esimo Fanfara"
+                src={"/Volantino Arruolamento.jpg"}
+                alt="Locandina arruolamento Fanfara Bersaglieri Settimo Torinese"
                 className="object-contain"
               />
               <span
