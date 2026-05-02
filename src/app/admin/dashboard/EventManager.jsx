@@ -160,7 +160,7 @@ export default function EventManager({ initialEvents }) {
           >
             {ev.image && (
               <img
-                src={`/${ev.image}`}
+                src={ev.image}
                 alt={ev.title}
                 className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
               />
