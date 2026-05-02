@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import eventiCompleti from "../lib/EventData.js";
 import { Button } from "./ui/button.jsx";
 import {
   CalendarDaysIcon,
@@ -10,7 +9,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/outline";
 
-const CalendarioCompleto = () => {
+const CalendarioCompleto = ({ events: eventiCompleti = [] }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 

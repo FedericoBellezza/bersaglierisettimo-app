@@ -3,14 +3,13 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import events from "../lib/EventData.js";
 import {
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline";
 
-const ProssimiEventi = () => {
+const ProssimiEventi = ({ events = [] }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
