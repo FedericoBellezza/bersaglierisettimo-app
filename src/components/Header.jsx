@@ -12,6 +12,7 @@ const Header = () => {
 
   const menuItems = [
     { href: "/calendario", label: "Calendario" },
+    { href: "/foto", label: "Foto" },
     { href: "/video", label: "Video" },
     { href: "/contatti", label: "Contatti" },
   ];

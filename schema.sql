@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS photos (
+  id         SERIAL PRIMARY KEY,
+  title      VARCHAR(255),
+  url        TEXT NOT NULL,
+  category   VARCHAR(100),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS events (
   id          SERIAL PRIMARY KEY,
   title       VARCHAR(255) NOT NULL,

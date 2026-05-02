@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -58,12 +57,9 @@ function eventToForm(ev) {
 function formToPayload(form) {
   const { date, month, year } = dateToItalian(form.dateInput);
   return {
-    title: form.title,
-    date, month, year,
-    location: form.location,
-    description: form.description,
-    image: form.image,
-    type: form.type,
+    title: form.title, date, month, year,
+    location: form.location, description: form.description,
+    image: form.image, type: form.type,
     startTime: form.startTime,
     endTime: form.endTime || null,
     locandina: form.locandina || null,
@@ -80,7 +76,6 @@ function Field({ label, children }) {
 }
 
 export default function EventManager({ initialEvents }) {
-  const router = useRouter();
   const [events, setEvents] = useState(initialEvents);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -146,82 +141,62 @@ export default function EventManager({ initialEvents }) {
     setConfirmDeleteId(null);
   }
 
-  async function handleLogout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin");
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center sticky top-0 z-10">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">🎺</span>
-          <h1 className="text-xl font-bold text-gray-900">Fanfara Admin</h1>
-        </div>
-        <Button variant="outline" size="sm" onClick={handleLogout}>
-          Esci
+    <>
+      <div className="flex justify-between items-center mb-6">
+        <p className="text-sm text-gray-500">
+          {events.length} {events.length === 1 ? "evento" : "eventi"}
+        </p>
+        <Button onClick={openAdd} className="bg-red-600 hover:bg-red-500 text-white">
+          + Nuovo Evento
         </Button>
-      </header>
+      </div>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <p className="text-sm text-gray-500">
-            {events.length} {events.length === 1 ? "evento" : "eventi"} in archivio
-          </p>
-          <Button
-            onClick={openAdd}
-            className="bg-red-600 hover:bg-red-500 text-white"
+      <div className="space-y-3">
+        {events.map((ev) => (
+          <div
+            key={ev.id}
+            className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex gap-4 items-center"
           >
-            + Nuovo Evento
-          </Button>
-        </div>
-
-        <div className="space-y-3">
-          {events.map((ev) => (
-            <div
-              key={ev.id}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex gap-4 items-center"
-            >
-              {ev.image && (
-                <img
-                  src={`/${ev.image}`}
-                  alt={ev.title}
-                  className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
-                />
-              )}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900 truncate">{ev.title}</h3>
-                <p className="text-sm text-gray-500 mt-0.5">
-                  {ev.date} · {ev.location}
-                </p>
-                <span className="inline-block mt-1 text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full font-medium">
-                  {ev.type}
-                </span>
-              </div>
-              <div className="flex gap-2 flex-shrink-0">
-                <Button size="sm" variant="outline" onClick={() => openEdit(ev)}>
-                  Modifica
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="text-red-600 border-red-200 hover:bg-red-50"
-                  onClick={() => setConfirmDeleteId(ev.id)}
-                >
-                  Elimina
-                </Button>
-              </div>
+            {ev.image && (
+              <img
+                src={`/${ev.image}`}
+                alt={ev.title}
+                className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+              />
+            )}
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 truncate">{ev.title}</h3>
+              <p className="text-sm text-gray-500 mt-0.5">
+                {ev.date} · {ev.location}
+              </p>
+              <span className="inline-block mt-1 text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full font-medium">
+                {ev.type}
+              </span>
             </div>
-          ))}
-
-          {events.length === 0 && (
-            <div className="text-center py-20 text-gray-400">
-              <p className="text-lg">Nessun evento presente.</p>
-              <p className="text-sm mt-1">Crea il primo evento con il pulsante in alto.</p>
+            <div className="flex gap-2 flex-shrink-0">
+              <Button size="sm" variant="outline" onClick={() => openEdit(ev)}>
+                Modifica
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-red-600 border-red-200 hover:bg-red-50"
+                onClick={() => setConfirmDeleteId(ev.id)}
+              >
+                Elimina
+              </Button>
             </div>
-          )}
-        </div>
-      </main>
+          </div>
+        ))}
+
+        {events.length === 0 && (
+          <div className="text-center py-20 text-gray-400">
+            <p className="text-lg">Nessun evento presente.</p>
+            <p className="text-sm mt-1">Crea il primo evento con il pulsante in alto.</p>
+          </div>
+        )}
+      </div>
 
       {/* Modal aggiungi/modifica */}
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
@@ -233,44 +208,23 @@ export default function EventManager({ initialEvents }) {
             <Field label="Titolo *">
               <input value={form.title} onChange={f("title")} className={INPUT_CLASS} required />
             </Field>
-
             <div className="grid grid-cols-2 gap-3">
               <Field label="Data *">
-                <input
-                  type="date"
-                  value={form.dateInput}
-                  onChange={f("dateInput")}
-                  className={INPUT_CLASS}
-                  required
-                />
+                <input type="date" value={form.dateInput} onChange={f("dateInput")} className={INPUT_CLASS} required />
               </Field>
               <Field label="Tipo">
-                <input
-                  value={form.type}
-                  onChange={f("type")}
-                  list="tipi-list"
-                  className={INPUT_CLASS}
-                  placeholder="es. Concerto"
-                />
+                <input value={form.type} onChange={f("type")} list="tipi-list" className={INPUT_CLASS} placeholder="es. Concerto" />
                 <datalist id="tipi-list">
                   {TIPI.map((t) => <option key={t} value={t} />)}
                 </datalist>
               </Field>
             </div>
-
             <Field label="Luogo">
               <input value={form.location} onChange={f("location")} className={INPUT_CLASS} />
             </Field>
-
             <Field label="Descrizione">
-              <textarea
-                value={form.description}
-                onChange={f("description")}
-                rows={3}
-                className={`${INPUT_CLASS} resize-none`}
-              />
+              <textarea value={form.description} onChange={f("description")} rows={3} className={`${INPUT_CLASS} resize-none`} />
             </Field>
-
             <div className="grid grid-cols-2 gap-3">
               <Field label="Ora inizio">
                 <input type="time" value={form.startTime} onChange={f("startTime")} className={INPUT_CLASS} />
@@ -279,33 +233,15 @@ export default function EventManager({ initialEvents }) {
                 <input type="time" value={form.endTime} onChange={f("endTime")} className={INPUT_CLASS} />
               </Field>
             </div>
-
             <Field label="Immagine (nome file, es. hero-image.avif)">
-              <input
-                value={form.image}
-                onChange={f("image")}
-                className={INPUT_CLASS}
-                placeholder="hero-image.avif"
-              />
+              <input value={form.image} onChange={f("image")} className={INPUT_CLASS} placeholder="hero-image.avif" />
             </Field>
-
             <Field label="Locandina (nome file, opzionale)">
-              <input
-                value={form.locandina}
-                onChange={f("locandina")}
-                className={INPUT_CLASS}
-                placeholder="locandina.jpg"
-              />
+              <input value={form.locandina} onChange={f("locandina")} className={INPUT_CLASS} placeholder="locandina.jpg" />
             </Field>
-
             {error && <p className="text-red-600 text-sm">{error}</p>}
-
             <div className="flex gap-3 pt-1">
-              <Button
-                type="submit"
-                disabled={saving}
-                className="flex-1 bg-red-600 hover:bg-red-500 text-white"
-              >
+              <Button type="submit" disabled={saving} className="flex-1 bg-red-600 hover:bg-red-500 text-white">
                 {saving ? "Salvataggio..." : editingId ? "Salva modifiche" : "Crea evento"}
               </Button>
               <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
@@ -326,10 +262,7 @@ export default function EventManager({ initialEvents }) {
             Sei sicuro di voler eliminare questo evento? L&apos;operazione non può essere annullata.
           </p>
           <div className="flex gap-3 mt-4">
-            <Button
-              className="flex-1 bg-red-600 hover:bg-red-500 text-white"
-              onClick={() => handleDelete(confirmDeleteId)}
-            >
+            <Button className="flex-1 bg-red-600 hover:bg-red-500 text-white" onClick={() => handleDelete(confirmDeleteId)}>
               Elimina
             </Button>
             <Button variant="outline" className="flex-1" onClick={() => setConfirmDeleteId(null)}>
@@ -338,6 +271,6 @@ export default function EventManager({ initialEvents }) {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }
